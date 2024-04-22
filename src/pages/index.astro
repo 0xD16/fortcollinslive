@@ -1,0 +1,26 @@
+---
+import FilterableEventTable from "../components/FilterableEventTable";
+import { fetchEvents } from "../api";
+
+const data = await fetchEvents();
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <script
+      defer
+      data-api="/api/event"
+      data-domain="fortcollinslive.com"
+      src="/js/script.js"></script>
+    <title>Fort Collins Live!</title>
+  </head>
+  <body>
+    <h1 class="w-full flex flex-row justify-center text-2xl">
+      Fort Collins Live Music
+    </h1>
+    <FilterableEventTable client:load events={data} />
+  </body>
+</html>
