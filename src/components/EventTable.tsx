@@ -15,6 +15,16 @@ const EventTable = ({ events }: Props) => {
         {/* <th>"Specials"</th> */}
       </thead>
       <tbody class={classes.table.body}>
+        {events.length === 0 && (
+          <tr>
+            <td
+              class={[classes.table.cell, "justify-center"].join(" ")}
+              colSpan={4}
+            >
+              Loading...
+            </td>
+          </tr>
+        )}
         {events.map((event: Event) => (
           <tr>
             <td class={classes.table.cell}>{event["Bar or Venue Name"]}</td>
