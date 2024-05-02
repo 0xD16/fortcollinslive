@@ -5,16 +5,27 @@ import { subtractDays } from "../date.ts";
 import { clsx } from "../utils.ts";
 import FilterSelect from "./FilterSelect.tsx";
 import { fetchEvents } from "../api.ts";
+
 interface Props {
   events: Event[];
 }
 
+const sameDay = (date1: Date, date2: Date) =>
+  date1.getFullYear() === date2.getFullYear() &&
+  date1.getMonth() === date2.getMonth() &&
+  date1.getDate() === date2.getDate();
+
 const dateFilters: {
   [key: string]: (event: Event) => boolean;
 } = {
-  Upcoming: (event: Event) =>
-    new Date(event["Date Select"]) >= subtractDays(new Date(), 3),
-  Past: (event: Event) => new Date(event["Date Select"]) < new Date(),
+  Upcoming: (event: Event) => {
+    const eventDate = new Date(event["Date Select"]);
+    return sameDay(eventDate, new Date()) || eventDate >= new Date();
+  },
+  Past: (event: Event) => {
+    const eventDate = new Date(event["Date Select"]);
+    return !sameDay(eventDate, new Date()) && eventDate < new Date();
+  },
 };
 
 const costFilterFactory = (cost: string) => (event: Event) =>

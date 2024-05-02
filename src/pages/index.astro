@@ -1,8 +1,5 @@
 ---
-import FilterableEventTable from "../components/FilterableEventTable";
-import { fetchEvents } from "../api";
-
-const data = await fetchEvents();
+import Events from "../components/Events.tsx";
 ---
 
 <html lang="en">
@@ -21,6 +18,13 @@ const data = await fetchEvents();
     <h1 class="w-full flex flex-row justify-center text-2xl">
       Fort Collins Live Music
     </h1>
-    <FilterableEventTable client:load events={data} />
+    <Events client:load />
+    <div class="flex flex-col align-center m-4 md:m-8">
+      <h2 class="text-lg font-semibold">Did We Miss Something?</h2>
+      <p>
+        Are we missing your live music venue? Contact us to get on the list!
+        <span>hello@</span>fortcollinslive.com
+      </p>
+    </div>
   </body>
 </html>
