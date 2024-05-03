@@ -1,3 +1,3 @@
 export const config = {
-    apiUrl: "https://api.us.dev/foco-live/events"
+    apiUrl: "https://cache.sh/foco-live/events"
 }
