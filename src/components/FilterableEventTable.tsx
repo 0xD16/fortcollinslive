@@ -94,11 +94,7 @@ export const FilterableEventTable = ({ events: initialEvents }: Props) => {
       </div>
       <div class={"mt-2"}>
         <EventTable
-          events={
-            dateFilter === "Upcoming"
-              ? filteredEvents.reverse()
-              : filteredEvents
-          }
+          events={filteredEvents}
         />
       </div>
     </div>
