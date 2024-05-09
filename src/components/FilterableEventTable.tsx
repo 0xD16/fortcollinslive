@@ -73,7 +73,8 @@ export const FilterableEventTable = ({ events: initialEvents }: Props) => {
             <div
               class={clsx(
                 classes.date.base,
-                dateFilter === "Upcoming" ? classes.date.active : ""
+                dateFilter === "Upcoming" ? classes.date.active : "",
+                "plausble-event-name=Upcoming+Events"
               )}
               onClick={() => setDateFilter("Upcoming")}
             >
@@ -82,7 +83,8 @@ export const FilterableEventTable = ({ events: initialEvents }: Props) => {
             <div
               class={clsx(
                 classes.date.base,
-                dateFilter === "Past" ? classes.date.active : ""
+                dateFilter === "Past" ? classes.date.active : "",
+                "plausble-event-name=Past+Events"
               )}
               onClick={() => setDateFilter("Past")}
             >
