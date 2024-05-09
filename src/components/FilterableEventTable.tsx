@@ -1,7 +1,6 @@
 import { useEffect, useState } from "preact/hooks";
 import type { Event } from "../types";
 import EventTable from "./EventTable.tsx";
-import { subtractDays } from "../date.ts";
 import { clsx } from "../utils.ts";
 import FilterSelect from "./FilterSelect.tsx";
 import { fetchEvents } from "../api.ts";
@@ -68,7 +67,7 @@ export const FilterableEventTable = ({ events: initialEvents }: Props) => {
             class={clsx(
               "flex flex-row",
               "mt-2 mx-2",
-              "border-slate-400 border-x-2 border-t-2 rounded-t-md"
+              "border-slate-400 border-x-2 border-2 rounded-md"
             )}
           >
             <div
@@ -93,8 +92,14 @@ export const FilterableEventTable = ({ events: initialEvents }: Props) => {
         </div>
         <FilterSelect filter={costFilter} onFilterChange={setCostFilter} />
       </div>
-      <div class={""}>
-        <EventTable events={filteredEvents} />
+      <div class={"mt-2"}>
+        <EventTable
+          events={
+            dateFilter === "Upcoming"
+              ? filteredEvents.reverse()
+              : filteredEvents
+          }
+        />
       </div>
     </div>
   );

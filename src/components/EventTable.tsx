@@ -6,51 +6,29 @@ interface Props {
 
 const EventTable = ({ events }: Props) => {
   return (
-    <table class={classes.table.root}>
-      <thead class={classes.table.head}>
-        <th>Bar or Venue Name</th>
-        <th>Band/DJ/Musician Name</th>
-        <th>When</th>
-        <th>Cost</th>
-        {/* <th>"Specials"</th> */}
-      </thead>
-      <tbody class={classes.table.body}>
-        {events.length === 0 && (
-          <tr>
-            <td
-              class={[classes.table.cell, "justify-center"].join(" ")}
-              colSpan={4}
-            >
-              Loading...
-            </td>
-          </tr>
-        )}
-        {events.map((event: Event) => (
-          <tr>
-            <td class={classes.table.cell}>{event["Bar or Venue Name"]}</td>
-            <td class={clsx(classes.table.cell, "w-64")}>
-              {event["Band/DJ/Musician Name"]}
-            </td>
-            <td>
-              {event["Date Select"].toLocaleDateString()}
-              <br />
-              {event["Music Start Time"]}
-            </td>
-            <td>{event["Cost"]}</td>
-            {/* <td>{event['"Specials" at Venue']}</td> */}
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <div className="flex flex-col sm:flex-row justify-center items-center flex-wrap gap-2">
+      {events.length === 0 && (
+        <div class="justify-center flex items-center w-full h-32 text-center p-2 m-2">
+          Loading...
+        </div>
+      )}
+      {events.map((event: Event) => (
+        <div class={classes.eventCard.root}>
+          <div class="font-semibold">{event["Band/DJ/Musician Name"]}</div>
+          <div class="">@ {event["Bar or Venue Name"]}</div>
+          <div>{event["Date Select"].toDateString()}</div>
+          <div>{event["Music Start Time"]}</div>
+          <div>{event["Cost"]}</div>
+          {/* <td>{event['"Specials" at Venue']}</td> */}
+        </div>
+      ))}
+    </div>
   );
 };
 
 const classes = {
-  table: {
-    root: "table-auto w-full",
-    head: "py-8 bg-slate-400",
-    body: "",
-    cell: "p-2",
+  eventCard: {
+    root: "flex flex-col justify-center h-full w-full sm:w-1/4 bg-slate-300 m-2 sm:m-0 p-2 gap-1 rounded-lg shadow-inner",
   },
 };
 
