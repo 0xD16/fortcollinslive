@@ -34,6 +34,14 @@ const datePreviousMonday = () => {
   monday.setHours(0, 0, 0, 0);
   return monday;
 };
+
+const dateMonday = () => {
+  if (new Date().getDay() === 1) {
+    return new Date();
+  }
+  return datePreviousMonday();
+};
+
 const months = [
   "Jan",
   "Feb",
@@ -87,7 +95,7 @@ const Ad = () => {
   const [events, setEvents] = useState<Event[]>([]);
   const [thisWeekend, setThisWeekend] = useState<Event[]>([]);
   const [friday, sunday] = datesForThisWeekend();
-  const monday = datePreviousMonday();
+  const monday = dateMonday();
 
   const isThisWeekend = (date: Date): boolean => {
     return date >= friday && date <= sunday;
