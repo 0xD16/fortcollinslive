@@ -1,0 +1,20 @@
+---
+import AdComponent from "../components/Ad.tsx";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <script
+      defer
+      data-api="/api/event"
+      data-domain="fortcollinslive.com"
+      src="/js/script.tagged-events.js"></script>
+    <title>Fort Collins Live!</title>
+  </head>
+  <body>
+    <AdComponent client:load />
+  </body>
+</html>

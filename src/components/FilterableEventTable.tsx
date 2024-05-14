@@ -27,6 +27,15 @@ const dateFilters: {
   },
 };
 
+const dateSorts: {
+  [key: string]: (a: Event, b: Event) => number;
+} = {
+  Upcoming: (a: Event, b: Event) =>
+    new Date(a["Date Select"]).getTime() - new Date(b["Date Select"]).getTime(),
+  Past: (a: Event, b: Event) =>
+    new Date(b["Date Select"]).getTime() - new Date(a["Date Select"]).getTime(),
+};
+
 const costFilterFactory = (cost: string) => (event: Event) =>
   event["Cost Select"] === cost;
 
@@ -95,9 +104,7 @@ export const FilterableEventTable = ({ events: initialEvents }: Props) => {
         <FilterSelect filter={costFilter} onFilterChange={setCostFilter} />
       </div>
       <div class={"mt-2"}>
-        <EventTable
-          events={filteredEvents}
-        />
+        <EventTable events={[...filteredEvents].sort(dateSorts[dateFilter])} />
       </div>
     </div>
   );

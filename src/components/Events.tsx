@@ -6,8 +6,13 @@ import FilterableEventTable from "./FilterableEventTable";
 
 const Events = () => {
   const [events, setEvents] = useState<Event[]>([]);
+  const loadEvents = async () => {
+    const events = await fetchEvents();
+    setEvents(events);
+  };
+
   useEffect(() => {
-    fetchEvents().then(setEvents);
+    loadEvents();
   }, []);
 
   return (
