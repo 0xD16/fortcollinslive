@@ -26,15 +26,14 @@ const datesForThisWeekend = (): [Date, Date] => {
   return [friday, sunday];
 };
 
-const dateMonday = () => {
+const datePreviousMonday = () => {
   const today = new Date();
   const todayDay = today.getDay();
   const monday = new Date(today);
-  monday.setDate(today.getDate() + ((1 - todayDay + 7) % 7));
+  monday.setDate(today.getDate() - ((todayDay + 6) % 7));
   monday.setHours(0, 0, 0, 0);
   return monday;
 };
-
 const months = [
   "Jan",
   "Feb",
@@ -88,7 +87,7 @@ const Ad = () => {
   const [events, setEvents] = useState<Event[]>([]);
   const [thisWeekend, setThisWeekend] = useState<Event[]>([]);
   const [friday, sunday] = datesForThisWeekend();
-  const monday = dateMonday();
+  const monday = datePreviousMonday();
 
   const isThisWeekend = (date: Date): boolean => {
     return date >= friday && date <= sunday;
