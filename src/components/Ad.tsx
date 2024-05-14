@@ -78,6 +78,12 @@ const datesToString = (dates: [Date, Date]) => [
   ].join(" "),
 ];
 
+const latestEventDate = (events: Event[]): Date =>
+  events.reduce((latest, event) => {
+    const date = new Date(event.Date);
+    return date > latest ? date : latest;
+  }, new Date(0));
+
 const Ad = () => {
   const [events, setEvents] = useState<Event[]>([]);
   const [thisWeekend, setThisWeekend] = useState<Event[]>([]);
@@ -113,7 +119,10 @@ const Ad = () => {
       }}
       class={"bg-black text-white p-4 justify-between flex flex-col"}
     >
-      <div>Live Music For {datesToString([monday, sunday]).join(" to ")}</div>
+      <div>
+        Live Music For{" "}
+        {datesToString([monday, latestEventDate(events)]).join(" to ")}
+      </div>
       <div class={"overflow-hidden text-wrap text-justify"}>
         {events.map((event) => {
           const date = new Date(event.Date);
