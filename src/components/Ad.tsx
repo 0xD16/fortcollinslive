@@ -2,6 +2,18 @@ import { useEffect, useState } from "preact/hooks";
 import type { Event } from "../types";
 import { fetchEvents } from "../api";
 
+const slogans = [
+  "live music index",
+  "consume. the. music.",
+  "just bands, no bullsh*t",
+  "the site says listen",
+  "you should go to a show",
+  "apply directly to the ears",
+  "the music is (a)live",
+];
+
+const randomSlogan = () => slogans[Math.floor(Math.random() * slogans.length)];
+
 const datesForThisWeekend = (): [Date, Date] => {
   const today = new Date();
   const todayDay = today.getDay();
@@ -101,7 +113,7 @@ const Ad = () => {
       }}
       class={"bg-black text-white p-4 justify-between flex flex-col"}
     >
-      <div>Music For {datesToString([monday, sunday]).join(" to ")}</div>
+      <div>Live Music For {datesToString([monday, sunday]).join(" to ")}</div>
       <div class={"overflow-hidden text-wrap text-justify"}>
         {events.map((event) => {
           const date = new Date(event.Date);
@@ -124,7 +136,10 @@ const Ad = () => {
           );
         })}
       </div>
-      <div>fortcollinslive.com</div>
+      <div class={"flex flex-row justify-between"}>
+        <div>fortcollinslive.com</div>
+        <div>{randomSlogan()}</div>
+      </div>
     </div>
   );
 };
