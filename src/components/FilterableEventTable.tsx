@@ -1,5 +1,5 @@
 import { useEffect, useState } from "preact/hooks";
-import type { Event } from "../types";
+import type { Event, VenueLookup } from "../types";
 import EventTable from "./EventTable.tsx";
 import { clsx } from "../utils.ts";
 import FilterSelect from "./FilterSelect.tsx";
@@ -7,6 +7,7 @@ import { fetchEvents } from "../api.ts";
 
 interface Props {
   events: Event[];
+  venues: VenueLookup;
 }
 
 const sameDay = (date1: Date, date2: Date) =>
@@ -50,7 +51,10 @@ const costFilters: {
   "$21+": costFilterFactory("$21+"),
 };
 
-export const FilterableEventTable = ({ events: initialEvents }: Props) => {
+export const FilterableEventTable = ({
+  events: initialEvents,
+  venues,
+}: Props) => {
   const [events, setEvents] = useState<Event[]>(initialEvents);
   const [dateFilter, setDateFilter] = useState("Upcoming");
   const [costFilter, setCostFilter] = useState("All Events");
@@ -104,8 +108,17 @@ export const FilterableEventTable = ({ events: initialEvents }: Props) => {
         <FilterSelect filter={costFilter} onFilterChange={setCostFilter} />
       </div>
       <div class={"mt-2"}>
-        <EventTable events={[...filteredEvents].sort(dateSorts[dateFilter])} />
+        <EventTable
+          venues={venues}
+          events={[...filteredEvents].sort(dateSorts[dateFilter])}
+        />
       </div>
+      {dateFilter === "Past" && (
+        <div class={"m-2 text-center italic text-xs"}>
+          Looking for an older event? We didn't forget about it, "back catalog"
+          coming soon...
+        </div>
+      )}
     </div>
   );
 };

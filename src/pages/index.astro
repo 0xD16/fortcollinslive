@@ -1,5 +1,10 @@
 ---
+import { fetchEvents } from "../api";
+import { fetchVenueLookup } from "../api";
 import Events from "../components/Events.tsx";
+
+const venues = await fetchVenueLookup();
+const initialEvents = await fetchEvents();
 ---
 
 <html lang="en">
@@ -18,7 +23,7 @@ import Events from "../components/Events.tsx";
     <h1 class="w-full flex flex-row justify-center text-2xl">
       Fort Collins Live Music
     </h1>
-    <Events client:load />
+    <Events initialEvents={initialEvents} venues={venues} client:load />
     <div class="flex flex-col align-center m-4 md:m-8">
       <h2 class="text-lg font-semibold">Did We Miss Something?</h2>
       <p>

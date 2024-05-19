@@ -1,10 +1,11 @@
-import type { Event } from "../types";
-import { clsx } from "../utils";
+import type { Event, VenueLookup } from "../types";
+
 interface Props {
   events: Event[];
+  venues: VenueLookup;
 }
 
-const EventTable = ({ events }: Props) => {
+const EventTable = ({ events, venues }: Props) => {
   return (
     <div className="flex flex-col sm:flex-row justify-center items-center flex-wrap gap-2">
       {events.length === 0 && (
@@ -12,16 +13,37 @@ const EventTable = ({ events }: Props) => {
           Loading...
         </div>
       )}
-      {events.map((event: Event) => (
-        <div class={classes.eventCard.root}>
-          <div class="font-semibold">{event["Band/DJ/Musician Name"]}</div>
-          <div class="">@ {event["Bar or Venue Name"]}</div>
-          <div>{event["Date Select"].toDateString()}</div>
-          <div>{event["Music Start Time"]}</div>
-          <div>{event["Cost"]}</div>
-          {/* <td>{event['"Specials" at Venue']}</td> */}
-        </div>
-      ))}
+      {events.map((event: Event) => {
+        const venue =
+          event.Venue !== undefined
+            ? venues.byId[event.Venue[0]]
+            : venues.byName[event["Bar or Venue Name"].trim()];
+
+        return (
+          <div class={classes.eventCard.root}>
+            <div class="font-semibold">{event["Band/DJ/Musician Name"]}</div>
+            <div class="">
+              @{" "}
+              {venue !== undefined ? (
+                <a
+                  href={venue.Website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class={"underline underline-offset-1"}
+                >
+                  {event["Bar or Venue Name"]}
+                </a>
+              ) : (
+                event["Bar or Venue Name"]
+              )}
+            </div>
+            <div>{event["Date Select"].toDateString()}</div>
+            <div>{event["Music Start Time"]}</div>
+            <div>{event["Cost"]}</div>
+            {/* <td>{event['"Specials" at Venue']}</td> */}
+          </div>
+        );
+      })}
     </div>
   );
 };
