@@ -1,5 +1,6 @@
 FROM node:18 as builder
 
+ENV TZ=America/Denver
 WORKDIR /app
 ADD package.json .
 ADD yarn.lock .
