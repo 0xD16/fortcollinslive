@@ -1,3 +1,6 @@
+
+export type DateFilter = "Upcoming" | "Past";
+
 export interface Event {
     "Date": string,
     "Music Start Time": string,
