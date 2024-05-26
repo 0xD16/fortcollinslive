@@ -20,8 +20,9 @@ const initialEvents = await fetchEvents();
     <title>Fort Collins Live!</title>
   </head>
   <body>
-    <h1 class="w-full flex flex-row justify-center text-2xl">
+    <h1 class="w-full flex flex-row justify-center text-2xl align-bottom">
       Fort Collins Live Music
+      <a href="/about" class="text-sm ml-2">(About)</a>
     </h1>
     <Events initialEvents={initialEvents} venues={venues} client:load />
     <div class="flex flex-col align-center m-4 md:m-8">
