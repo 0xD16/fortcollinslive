@@ -126,31 +126,22 @@ const Ad = () => {
       }}
       class={"bg-black text-white p-4 justify-between flex flex-col"}
     >
-      <div>
-        Live Music For{" "}
-        {datesToString([monday, latestEventDate(events)]).join(" to ")}
-      </div>
+      <div>Live Music This Week</div>
       <div class={"overflow-hidden text-wrap text-justify"}>
-        {events.map((event) => {
-          const date = new Date(event.Date);
-          return (
-            <span class={"pr-2"}>
-              <span class={"text-sm text-blue-300 text-wrap pr-2"}>
-                {event["Band/DJ/Musician Name"]}
+        {events
+          .filter((event) => {
+            if (event["Band/DJ/Musician Name"].includes("Their own DJ"))
+              return false;
+            return true;
+          })
+          .map((event, i, renderedEvents) => {
+            return (
+              <span key={i} class={"text-2xs text-blue-300 text-wrap pr-1"}>
+                {event["Band/DJ/Musician Name"].trim()}
+                {i === renderedEvents.length - 1 ? "" : ", "}
               </span>
-              <span class={"italic text-xs pr-1 text-wrap text-slate-400"}>
-                {event["Bar or Venue Name"]}
-              </span>
-              <span
-                class={
-                  "text-slate-400 text-xs text-wrap pr-1 border-r-2 border-slate-700"
-                }
-              >
-                {months[date.getMonth()]} {date.getDate()}
-              </span>
-            </span>
-          );
-        })}
+            );
+          })}
       </div>
       <div class={"flex flex-row justify-between"}>
         <div>fortcollinslive.com</div>
