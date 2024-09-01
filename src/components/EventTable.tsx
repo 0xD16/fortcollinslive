@@ -40,6 +40,16 @@ const EventTable = ({ events, venues }: Props) => {
             <div>{event["Date Select"].toDateString()}</div>
             <div>{event["Music Start Time"]}</div>
             <div>{event["Cost"]}</div>
+            {event.Genre && (
+              <div
+                className={"cursor-help"}
+                title={
+                  "Genres are provided by the Venue and represented as is."
+                }
+              >
+                {event.Genre}
+              </div>
+            )}
             {/* <td>{event['"Specials" at Venue']}</td> */}
           </div>
         );

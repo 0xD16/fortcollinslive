@@ -1,3 +1,3 @@
 export const config = {
-    apiUrl: "https://fortcollinslive.com/api"
-}
+  apiUrl: "https://api.us.dev/foco-live",
+};
