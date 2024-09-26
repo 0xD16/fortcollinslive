@@ -45,6 +45,43 @@ const EventTable = ({ events, venues }: Props) => {
           </div>
         );
       })}
+      <div class={classes.voteCard.root}>
+        <div class="font-semibold">Vote!</div>
+        <div class="">
+          fortcollinslive.com doesn't care who/what you vote for, but be sure to
+          make your voice heard!
+        </div>
+        <div>
+          <a
+            href="https://leg.colorado.gov/content/initiatives/initiatives-blue-book-overview/ballot-information-booklet-blue-book"
+            target="_blank"
+            rel="noopener noreferrer"
+            class={"underline underline-offset-1"}
+          >
+            Colorado Ballot Information Booklet (Blue Book)
+          </a>
+        </div>
+        <div>
+          <a
+            href="https://www.coloradosos.gov/voter/pages/pub/home.xhtml"
+            target="_blank"
+            rel="noopener noreferrer"
+            class={"underline underline-offset-1"}
+          >
+            Register to Vote
+          </a>
+        </div>
+        <div>
+          <a
+            href="https://www.larimer.gov/clerk/elections"
+            target="_blank"
+            rel="noopener noreferrer"
+            class={"underline underline-offset-1"}
+          >
+            Larimer County Election Information
+          </a>
+        </div>
+      </div>
     </div>
   );
 };
@@ -52,6 +89,9 @@ const EventTable = ({ events, venues }: Props) => {
 const classes = {
   eventCard: {
     root: "flex flex-col justify-center h-full w-full sm:w-1/4 bg-slate-300 m-2 sm:m-0 p-2 gap-1 rounded-lg shadow-inner",
+  },
+  voteCard: {
+    root: "flex flex-col justify-center h-full w-full sm:w-1/4 bg-blue-200 m-2 sm:m-0 p-2 gap-1 rounded-lg shadow-inner",
   },
 };
 
